@@ -50,15 +50,14 @@ export function SiteHeader() {
           >
             Get a ticket ✈
           </a>
+          <button
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-secondary lg:hidden"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-
-        <button
-          className="lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X /> : <Menu />}
-        </button>
       </div>
 
       {open && (
