@@ -7,7 +7,7 @@ import * as THREE from "three";
 // lowercase JSX elements like <mesh>, <coneGeometry>, etc. resolve under
 // React 19 + r3f v9 + Vite HMR. Without this, children of <Canvas> can
 // silently fail to mount.
-extend(THREE);
+extend(THREE as unknown as Record<string, new (...args: never[]) => unknown>);
 
 export type LandmarkKind = "tower" | "skytree" | "pagoda" | "torii";
 
