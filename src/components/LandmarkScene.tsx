@@ -1,6 +1,6 @@
 import { Suspense, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, OrbitControls, Text3D, Center } from "@react-three/drei";
+import { Float, OrbitControls, Text, Center } from "@react-three/drei";
 import * as THREE from "three";
 
 export type LandmarkKind = "tower" | "skytree" | "pagoda" | "torii";
@@ -134,7 +134,6 @@ function LandmarkMesh({ kind }: { kind: LandmarkKind }) {
 
 function TextRing({ text, radius = 2.2, y = 1.0 }: { text: string; radius?: number; y?: number }) {
   const groupRef = useRef<THREE.Group>(null!);
-  // Distribute characters along a circle
   const chars = useMemo(() => Array.from(text), [text]);
   useFrame((_, dt) => {
     if (groupRef.current) groupRef.current.rotation.y -= dt * 0.15;
@@ -146,24 +145,19 @@ function TextRing({ text, radius = 2.2, y = 1.0 }: { text: string; radius?: numb
         const x = Math.cos(angle) * radius;
         const z = Math.sin(angle) * radius;
         return (
-          <group key={i} position={[x, 0, z]} rotation={[0, -angle + Math.PI / 2, 0]}>
-            <Text3D
-              font="https://threejs.org/examples/fonts/helvetiker_bold.typeface.json"
-              size={0.18}
-              height={0.03}
-              curveSegments={4}
-              bevelEnabled
-              bevelThickness={0.005}
-              bevelSize={0.005}
-            >
-              {ch === " " ? "·" : ch}
-              <meshStandardMaterial
-                color="#ff2d8a"
-                emissive="#ff2d8a"
-                emissiveIntensity={0.8}
-              />
-            </Text3D>
-          </group>
+          <Text
+            key={i}
+            position={[x, 0, z]}
+            rotation={[0, -angle + Math.PI / 2, 0]}
+            fontSize={0.22}
+            color="#ff2d8a"
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.005}
+            outlineColor="#ff2d8a"
+          >
+            {ch === " " ? "·" : ch}
+          </Text>
         );
       })}
     </group>
