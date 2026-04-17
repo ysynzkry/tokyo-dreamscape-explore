@@ -29,13 +29,13 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TOKYO — Neon City Guide" },
+      { title: "TOKYO — Dreamscape" },
       {
         name: "description",
         content:
           "A neon journey through Tokyo: culture, food, history, landmarks in 3D, and a bridge to Cairo.",
       },
-      { property: "og:title", content: "TOKYO — Neon City Guide" },
+      { property: "og:title", content: "TOKYO — Dreamscape" },
       {
         property: "og:description",
         content:
@@ -43,6 +43,10 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "TOKYO — Dreamscape" },
+      { name: "description", content: "Explore Tokyo's culture, food, history, and landmarks with interactive 3D models and animations." },
+      { property: "og:description", content: "Explore Tokyo's culture, food, history, and landmarks with interactive 3D models and animations." },
+      { name: "twitter:description", content: "Explore Tokyo's culture, food, history, and landmarks with interactive 3D models and animations." },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
