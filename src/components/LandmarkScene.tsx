@@ -1,13 +1,7 @@
 import { Suspense, useMemo, useRef } from "react";
-import { Canvas, useFrame, extend } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, OrbitControls, Text, Center } from "@react-three/drei";
 import * as THREE from "three";
-
-// Explicitly extend the R3F catalogue with all Three.js classes so that
-// lowercase JSX elements like <mesh>, <coneGeometry>, etc. resolve under
-// React 19 + r3f v9 + Vite HMR. Without this, children of <Canvas> can
-// silently fail to mount.
-extend(THREE as unknown as Record<string, new (...args: never[]) => unknown>);
 
 export type LandmarkKind = "tower" | "skytree" | "pagoda" | "torii";
 
