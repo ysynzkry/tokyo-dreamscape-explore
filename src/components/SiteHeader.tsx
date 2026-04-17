@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { MusicToggle } from "@/components/MusicToggle";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -39,22 +40,24 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <a
-          href="https://www.egyptair.com/en/Plan-and-book/Pages/default.aspx"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden rounded-full bg-pink-red-gradient px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/40 transition-transform hover:scale-105 md:inline-flex"
-        >
-          Get a ticket ✈
-        </a>
-
-        <button
-          className="lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X /> : <Menu />}
-        </button>
+        <div className="flex items-center gap-2">
+          <MusicToggle />
+          <a
+            href="https://www.egyptair.com/en/Plan-and-book/Pages/default.aspx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden rounded-full bg-pink-red-gradient px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/40 transition-transform hover:scale-105 md:inline-flex"
+          >
+            Get a ticket ✈
+          </a>
+          <button
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-secondary lg:hidden"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
