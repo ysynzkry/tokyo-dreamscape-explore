@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TokyoCairoRouteImport } from './routes/tokyo-cairo'
+import { Route as LandmarksRouteImport } from './routes/landmarks'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as FoodRouteImport } from './routes/food'
+import { Route as CultureRouteImport } from './routes/culture'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TokyoCairoRoute = TokyoCairoRouteImport.update({
+  id: '/tokyo-cairo',
+  path: '/tokyo-cairo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LandmarksRoute = LandmarksRouteImport.update({
+  id: '/landmarks',
+  path: '/landmarks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoodRoute = FoodRouteImport.update({
+  id: '/food',
+  path: '/food',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CultureRoute = CultureRouteImport.update({
+  id: '/culture',
+  path: '/culture',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,96 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/culture': typeof CultureRoute
+  '/food': typeof FoodRoute
+  '/history': typeof HistoryRoute
+  '/landmarks': typeof LandmarksRoute
+  '/tokyo-cairo': typeof TokyoCairoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/culture': typeof CultureRoute
+  '/food': typeof FoodRoute
+  '/history': typeof HistoryRoute
+  '/landmarks': typeof LandmarksRoute
+  '/tokyo-cairo': typeof TokyoCairoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/culture': typeof CultureRoute
+  '/food': typeof FoodRoute
+  '/history': typeof HistoryRoute
+  '/landmarks': typeof LandmarksRoute
+  '/tokyo-cairo': typeof TokyoCairoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/culture'
+    | '/food'
+    | '/history'
+    | '/landmarks'
+    | '/tokyo-cairo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/culture' | '/food' | '/history' | '/landmarks' | '/tokyo-cairo'
+  id:
+    | '__root__'
+    | '/'
+    | '/culture'
+    | '/food'
+    | '/history'
+    | '/landmarks'
+    | '/tokyo-cairo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CultureRoute: typeof CultureRoute
+  FoodRoute: typeof FoodRoute
+  HistoryRoute: typeof HistoryRoute
+  LandmarksRoute: typeof LandmarksRoute
+  TokyoCairoRoute: typeof TokyoCairoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tokyo-cairo': {
+      id: '/tokyo-cairo'
+      path: '/tokyo-cairo'
+      fullPath: '/tokyo-cairo'
+      preLoaderRoute: typeof TokyoCairoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/landmarks': {
+      id: '/landmarks'
+      path: '/landmarks'
+      fullPath: '/landmarks'
+      preLoaderRoute: typeof LandmarksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/food': {
+      id: '/food'
+      path: '/food'
+      fullPath: '/food'
+      preLoaderRoute: typeof FoodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/culture': {
+      id: '/culture'
+      path: '/culture'
+      fullPath: '/culture'
+      preLoaderRoute: typeof CultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +151,21 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CultureRoute: CultureRoute,
+  FoodRoute: FoodRoute,
+  HistoryRoute: HistoryRoute,
+  LandmarksRoute: LandmarksRoute,
+  TokyoCairoRoute: TokyoCairoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
