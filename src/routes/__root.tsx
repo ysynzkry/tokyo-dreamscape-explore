@@ -2,6 +2,7 @@ import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-r
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SakuraPetals } from "@/components/SakuraPetals";
 
 function NotFoundComponent() {
   return (
@@ -66,9 +67,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="relative flex min-h-screen flex-col bg-background">
+      <SakuraPetals density={45} />
       <SiteHeader />
-      <main className="flex-1">
+      <main className="relative z-10 flex-1">
         <Outlet />
       </main>
       <SiteFooter />
