@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { MusicToggle } from "@/components/MusicToggle";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -39,14 +40,17 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <a
-          href="https://www.egyptair.com/en/Plan-and-book/Pages/default.aspx"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden rounded-full bg-pink-red-gradient px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/40 transition-transform hover:scale-105 md:inline-flex"
-        >
-          Get a ticket ✈
-        </a>
+        <div className="flex items-center gap-2">
+          <MusicToggle />
+          <a
+            href="https://www.egyptair.com/en/Plan-and-book/Pages/default.aspx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden rounded-full bg-pink-red-gradient px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/40 transition-transform hover:scale-105 md:inline-flex"
+          >
+            Get a ticket ✈
+          </a>
+        </div>
 
         <button
           className="lg:hidden"
