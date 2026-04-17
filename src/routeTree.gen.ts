@@ -9,13 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WalkRouteImport } from './routes/walk'
+import { Route as TriviaRouteImport } from './routes/trivia'
 import { Route as TokyoCairoRouteImport } from './routes/tokyo-cairo'
 import { Route as LandmarksRouteImport } from './routes/landmarks'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as FoodRouteImport } from './routes/food'
+import { Route as ExperiencesRouteImport } from './routes/experiences'
 import { Route as CultureRouteImport } from './routes/culture'
+import { Route as CreditsRouteImport } from './routes/credits'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WalkRoute = WalkRouteImport.update({
+  id: '/walk',
+  path: '/walk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TriviaRoute = TriviaRouteImport.update({
+  id: '/trivia',
+  path: '/trivia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TokyoCairoRoute = TokyoCairoRouteImport.update({
   id: '/tokyo-cairo',
   path: '/tokyo-cairo',
@@ -36,9 +51,24 @@ const FoodRoute = FoodRouteImport.update({
   path: '/food',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExperiencesRoute = ExperiencesRouteImport.update({
+  id: '/experiences',
+  path: '/experiences',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CultureRoute = CultureRouteImport.update({
   id: '/culture',
   path: '/culture',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreditsRoute = CreditsRouteImport.update({
+  id: '/credits',
+  path: '/credits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,61 +79,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/credits': typeof CreditsRoute
   '/culture': typeof CultureRoute
+  '/experiences': typeof ExperiencesRoute
   '/food': typeof FoodRoute
   '/history': typeof HistoryRoute
   '/landmarks': typeof LandmarksRoute
   '/tokyo-cairo': typeof TokyoCairoRoute
+  '/trivia': typeof TriviaRoute
+  '/walk': typeof WalkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/credits': typeof CreditsRoute
   '/culture': typeof CultureRoute
+  '/experiences': typeof ExperiencesRoute
   '/food': typeof FoodRoute
   '/history': typeof HistoryRoute
   '/landmarks': typeof LandmarksRoute
   '/tokyo-cairo': typeof TokyoCairoRoute
+  '/trivia': typeof TriviaRoute
+  '/walk': typeof WalkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/credits': typeof CreditsRoute
   '/culture': typeof CultureRoute
+  '/experiences': typeof ExperiencesRoute
   '/food': typeof FoodRoute
   '/history': typeof HistoryRoute
   '/landmarks': typeof LandmarksRoute
   '/tokyo-cairo': typeof TokyoCairoRoute
+  '/trivia': typeof TriviaRoute
+  '/walk': typeof WalkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/credits'
     | '/culture'
+    | '/experiences'
     | '/food'
     | '/history'
     | '/landmarks'
     | '/tokyo-cairo'
+    | '/trivia'
+    | '/walk'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/culture' | '/food' | '/history' | '/landmarks' | '/tokyo-cairo'
+  to:
+    | '/'
+    | '/about'
+    | '/credits'
+    | '/culture'
+    | '/experiences'
+    | '/food'
+    | '/history'
+    | '/landmarks'
+    | '/tokyo-cairo'
+    | '/trivia'
+    | '/walk'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/credits'
     | '/culture'
+    | '/experiences'
     | '/food'
     | '/history'
     | '/landmarks'
     | '/tokyo-cairo'
+    | '/trivia'
+    | '/walk'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CreditsRoute: typeof CreditsRoute
   CultureRoute: typeof CultureRoute
+  ExperiencesRoute: typeof ExperiencesRoute
   FoodRoute: typeof FoodRoute
   HistoryRoute: typeof HistoryRoute
   LandmarksRoute: typeof LandmarksRoute
   TokyoCairoRoute: typeof TokyoCairoRoute
+  TriviaRoute: typeof TriviaRoute
+  WalkRoute: typeof WalkRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/walk': {
+      id: '/walk'
+      path: '/walk'
+      fullPath: '/walk'
+      preLoaderRoute: typeof WalkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trivia': {
+      id: '/trivia'
+      path: '/trivia'
+      fullPath: '/trivia'
+      preLoaderRoute: typeof TriviaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tokyo-cairo': {
       id: '/tokyo-cairo'
       path: '/tokyo-cairo'
@@ -132,11 +217,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FoodRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/experiences': {
+      id: '/experiences'
+      path: '/experiences'
+      fullPath: '/experiences'
+      preLoaderRoute: typeof ExperiencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/culture': {
       id: '/culture'
       path: '/culture'
       fullPath: '/culture'
       preLoaderRoute: typeof CultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/credits': {
+      id: '/credits'
+      path: '/credits'
+      fullPath: '/credits'
+      preLoaderRoute: typeof CreditsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -151,11 +257,16 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CreditsRoute: CreditsRoute,
   CultureRoute: CultureRoute,
+  ExperiencesRoute: ExperiencesRoute,
   FoodRoute: FoodRoute,
   HistoryRoute: HistoryRoute,
   LandmarksRoute: LandmarksRoute,
   TokyoCairoRoute: TokyoCairoRoute,
+  TriviaRoute: TriviaRoute,
+  WalkRoute: WalkRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
