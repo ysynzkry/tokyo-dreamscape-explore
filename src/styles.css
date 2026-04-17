@@ -36,6 +36,7 @@
   --color-neon-pink: var(--neon-pink);
   --color-neon-red: var(--neon-red);
   --color-neon-magenta: var(--neon-magenta);
+  --color-sakura: var(--sakura);
   --color-ink: var(--ink);
 
   --font-display: "Russo One", "Noto Sans JP", system-ui, sans-serif;
@@ -46,61 +47,75 @@
 :root {
   --radius: 0.75rem;
 
-  /* Tokyo Neon — black / pink / red */
-  --background: oklch(0.13 0.02 350);
-  --foreground: oklch(0.97 0.01 340);
-  --card: oklch(0.17 0.03 350);
-  --card-foreground: oklch(0.97 0.01 340);
-  --popover: oklch(0.15 0.03 350);
-  --popover-foreground: oklch(0.97 0.01 340);
+  /* Tokyo Neon — black / hot pink / red, leaning HARD into pink */
+  --background: oklch(0.13 0.04 350);
+  --foreground: oklch(0.98 0.015 340);
+  --card: oklch(0.18 0.06 350);
+  --card-foreground: oklch(0.98 0.015 340);
+  --popover: oklch(0.16 0.05 350);
+  --popover-foreground: oklch(0.98 0.015 340);
 
-  --primary: oklch(0.7 0.28 0); /* hot red */
+  /* Primary is now hot pink (was red). */
+  --primary: oklch(0.72 0.3 350);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.22 0.05 350);
-  --secondary-foreground: oklch(0.97 0.01 340);
-  --muted: oklch(0.2 0.03 350);
-  --muted-foreground: oklch(0.7 0.04 340);
-  --accent: oklch(0.7 0.3 350); /* neon pink */
+  --secondary: oklch(0.24 0.08 350);
+  --secondary-foreground: oklch(0.98 0.015 340);
+  --muted: oklch(0.22 0.05 350);
+  --muted-foreground: oklch(0.78 0.06 340);
+  --accent: oklch(0.78 0.28 350); /* brighter neon pink */
   --accent-foreground: oklch(0.1 0.02 350);
   --destructive: oklch(0.65 0.27 25);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.3 0.06 350 / 60%);
-  --input: oklch(0.25 0.05 350);
-  --ring: oklch(0.7 0.3 350);
+  --border: oklch(0.4 0.12 350 / 55%);
+  --input: oklch(0.28 0.08 350);
+  --ring: oklch(0.78 0.3 350);
 
-  --neon-pink: oklch(0.78 0.27 350);
-  --neon-magenta: oklch(0.65 0.32 0);
+  --neon-pink: oklch(0.8 0.28 350);
+  --neon-magenta: oklch(0.68 0.32 0);
   --neon-red: oklch(0.65 0.28 25);
+  --sakura: oklch(0.92 0.07 350);
   --ink: oklch(0.08 0.02 350);
 
   --gradient-tokyo: linear-gradient(
     135deg,
-    oklch(0.08 0.02 350) 0%,
-    oklch(0.18 0.12 350) 35%,
-    oklch(0.45 0.28 0) 70%,
-    oklch(0.6 0.27 25) 100%
+    oklch(0.1 0.04 350) 0%,
+    oklch(0.25 0.18 350) 30%,
+    oklch(0.55 0.3 350) 65%,
+    oklch(0.65 0.28 15) 100%
   );
   --gradient-pink-red: linear-gradient(
     90deg,
-    oklch(0.78 0.27 350),
+    oklch(0.85 0.18 350),
+    oklch(0.78 0.28 350),
     oklch(0.65 0.28 15)
+  );
+  --gradient-pink-pink: linear-gradient(
+    90deg,
+    oklch(0.92 0.1 350),
+    oklch(0.78 0.28 350),
+    oklch(0.62 0.3 0)
   );
   --gradient-radial-pink: radial-gradient(
     circle at 30% 20%,
-    oklch(0.55 0.3 350 / 50%),
-    transparent 60%
+    oklch(0.6 0.32 350 / 60%),
+    transparent 65%
+  );
+  --gradient-sakura-mist: radial-gradient(
+    ellipse at 50% 100%,
+    oklch(0.7 0.25 350 / 35%),
+    transparent 70%
   );
 
-  --shadow-neon-pink: 0 0 20px oklch(0.78 0.27 350 / 60%),
-    0 0 60px oklch(0.78 0.27 350 / 30%);
+  --shadow-neon-pink: 0 0 25px oklch(0.8 0.28 350 / 70%),
+    0 0 70px oklch(0.8 0.28 350 / 35%);
   --shadow-neon-red: 0 0 20px oklch(0.65 0.28 15 / 60%),
     0 0 60px oklch(0.65 0.28 15 / 30%);
+  --shadow-sakura: 0 4px 30px oklch(0.78 0.28 350 / 40%);
 }
 
 .dark {
-  /* same palette — site is always dark */
-  --background: oklch(0.13 0.02 350);
-  --foreground: oklch(0.97 0.01 340);
+  --background: oklch(0.13 0.04 350);
+  --foreground: oklch(0.98 0.015 340);
 }
 
 @layer base {
@@ -114,6 +129,18 @@
     color: var(--foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle pink ambient haze on the whole page */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 15% 10%, oklch(0.55 0.3 350 / 18%), transparent 55%),
+      radial-gradient(circle at 85% 90%, oklch(0.6 0.3 0 / 15%), transparent 55%);
+    z-index: 0;
   }
 
   h1,
@@ -138,8 +165,20 @@
   .bg-pink-red-gradient {
     background: var(--gradient-pink-red);
   }
+  .bg-pink-pink-gradient {
+    background: var(--gradient-pink-pink);
+  }
+  .bg-sakura-mist {
+    background: var(--gradient-sakura-mist);
+  }
   .text-pink-red-gradient {
     background: var(--gradient-pink-red);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-pink-pink-gradient {
+    background: var(--gradient-pink-pink);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -152,18 +191,21 @@
   }
   .text-neon-pink {
     color: var(--neon-pink);
-    text-shadow: 0 0 12px oklch(0.78 0.27 350 / 70%);
+    text-shadow: 0 0 14px oklch(0.8 0.28 350 / 80%);
   }
   .text-neon-red {
     color: var(--neon-red);
     text-shadow: 0 0 12px oklch(0.65 0.28 15 / 70%);
   }
+  .text-sakura {
+    color: var(--sakura);
+  }
 
-  /* Animated grid background */
+  /* Animated grid background — pinker */
   .bg-grid {
     background-image:
-      linear-gradient(oklch(0.78 0.27 350 / 8%) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(0.78 0.27 350 / 8%) 1px, transparent 1px);
+      linear-gradient(oklch(0.8 0.28 350 / 12%) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.8 0.28 350 / 12%) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
@@ -203,7 +245,7 @@
 
   @keyframes neon-pulse {
     0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px var(--neon-pink)); }
-    50% { opacity: 0.85; filter: drop-shadow(0 0 24px var(--neon-pink)); }
+    50% { opacity: 0.85; filter: drop-shadow(0 0 28px var(--neon-pink)); }
   }
   .animate-neon-pulse {
     animation: neon-pulse 3s ease-in-out infinite;
