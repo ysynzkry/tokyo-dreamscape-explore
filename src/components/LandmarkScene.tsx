@@ -177,17 +177,24 @@ export function LandmarkScene({
 }) {
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl border border-border bg-ink"
-      style={{ height }}
+      className="relative w-full overflow-hidden rounded-2xl border border-border"
+      style={{
+        height,
+        background:
+          "radial-gradient(circle at 30% 20%, oklch(0.35 0.22 350 / 60%), oklch(0.08 0.02 350) 70%)",
+      }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
-      <Canvas camera={{ position: [4, 2.5, 4], fov: 45 }} dpr={[1, 2]}>
-        <color attach="background" args={["#0a0510"]} />
-        <fog attach="fog" args={["#0a0510", 6, 14]} />
-        <ambientLight intensity={0.4} />
-        <pointLight position={[3, 4, 3]} intensity={2} color="#ff2d8a" />
-        <pointLight position={[-3, 2, -3]} intensity={1.5} color="#ff2d55" />
-        <pointLight position={[0, -2, 0]} intensity={0.5} color="#ff5577" />
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-25" />
+      <Canvas
+        camera={{ position: [5, 3, 5], fov: 50 }}
+        dpr={[1, 2]}
+        gl={{ alpha: true, antialias: true }}
+      >
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[5, 8, 5]} intensity={2.5} color="#ffffff" />
+        <pointLight position={[3, 4, 3]} intensity={40} color="#ff2d8a" distance={15} />
+        <pointLight position={[-3, 2, -3]} intensity={30} color="#ff2d55" distance={15} />
+        <pointLight position={[0, -1, 4]} intensity={20} color="#ff5577" distance={12} />
 
         <Suspense fallback={null}>
           <Float speed={1.2} rotationIntensity={0.3} floatIntensity={0.4}>
@@ -195,14 +202,14 @@ export function LandmarkScene({
               <LandmarkMesh kind={kind} />
             </Center>
           </Float>
-          <TextRing text={`${ringText}   ✦   `} radius={2.4} y={1.2} />
-          <TextRing text={`${ringText}   ✦   `} radius={2.0} y={0.2} />
+          <TextRing text={`${ringText}   ✦   `} radius={2.6} y={1.4} />
+          <TextRing text={`${ringText}   ✦   `} radius={2.2} y={0.3} />
         </Suspense>
 
         {/* ground glow disc */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
-          <ringGeometry args={[1.2, 3.2, 64]} />
-          <meshBasicMaterial color="#ff2d8a" transparent opacity={0.08} />
+          <ringGeometry args={[1.2, 3.6, 64]} />
+          <meshBasicMaterial color="#ff2d8a" transparent opacity={0.15} />
         </mesh>
 
         <OrbitControls
@@ -212,9 +219,10 @@ export function LandmarkScene({
           autoRotateSpeed={1.2}
           minPolarAngle={Math.PI / 3}
           maxPolarAngle={Math.PI / 1.8}
+          target={[0, 1, 0]}
         />
       </Canvas>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
     </div>
   );
 }
